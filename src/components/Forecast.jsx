@@ -30,7 +30,8 @@ class Forecast extends Component {
         ).then(result =>
           this.setState({
             weatherObj: result.data,
-            fiveDay: result.data.consolidated_weather
+            fiveDay: result.data.consolidated_weather,
+            search: ''
           })
         );
       }
@@ -55,7 +56,7 @@ class Forecast extends Component {
         <div className="forecast">
           {this.state.weatherObj
             ? this.state.fiveDay.map((el, i) => <Weather key={el.id} el={el} weatherObj={this.state.weatherObj} />)
-            : "City not found, check spelling and try again"}
+            : <h1>City not found, check spelling and try again</h1>}
         </div>
       </div>
     );
