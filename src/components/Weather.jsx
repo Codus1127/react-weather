@@ -22,7 +22,6 @@ class Weather extends Component {
     if (prevState.url !== this.state.url) {
       this.setBackground();
       this.getWeatherIcon();
-      console.log(this.state.icon);
     }
   }
 
@@ -45,9 +44,7 @@ class Weather extends Component {
   };
 
   setBackground = () => {
-    // console.log(weather)
     const weather = this.props.el.weather_state_name;
-    console.log(weather);
     if (weather == "Light Cloud") {
       this.setState({
         url:
@@ -121,7 +118,7 @@ class Weather extends Component {
               />
               <h2>{fahrenheit + "°"}</h2>
               <div className="highLow">
-                <p>{"Low " + minTemp + "° / "}</p>
+                <p>{"Low " + minTemp + "° /" }</p>
                 <p>{maxTemp + "° High"}</p>
               </div>
             </div>

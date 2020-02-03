@@ -22,13 +22,18 @@ class Forecast extends Component {
     this.setState({ search: event.target.value });
   };
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.getWeather()
+    }
+  }
+
   getWeather = async () => {
     const city = this.state.search;
     await Axios.get(
       `https://www.metaweather.com/api/location/search/?query=${city}`
     ).then(async res => {
       if (res.data[0]) {
-        // console.log(res.data[0])
         await Axios.get(
           `http://www.metaweather.com/api/location/${res.data[0].woeid}`
         ).then(result =>
@@ -58,10 +63,11 @@ class Forecast extends Component {
           type="text"
           onChange={this.handleChange}
           value={this.state.search}
+          onKeyPress={this.handleKeyPress}
         />
-        <button onClick={() => this.getWeather()}>search</button>
-        <h1>{this.state.weatherObj ? this.state.weatherObj.title : null}</h1>
-        <div className="forecast">
+        <button onClick={() => this.getWeather()}>Search</button>
+        <h1 className="cityTitle">{this.state.weatherObj ? this.state.weatherObj.title : null}</h1>
+        <div className="weatherCard">
           {this.state.weatherObj ? (
             this.state.fiveDay.map((el, i) => (
               <Weather key={el.id} el={el} weatherObj={this.state.weatherObj} />
