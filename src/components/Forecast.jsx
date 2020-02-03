@@ -12,7 +12,11 @@ class Forecast extends Component {
     };
   }
 
-  componentDidMount = () => {};
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.error !== this.state.error) {
+      this.getWeather();
+    }
+  }
 
   handleChange = event => {
     this.setState({ search: event.target.value });
@@ -31,11 +35,17 @@ class Forecast extends Component {
           this.setState({
             weatherObj: result.data,
             fiveDay: result.data.consolidated_weather,
-            search: ''
+            search: ""
           })
         );
       }
-      await console.log(this.state.weatherObj);
+      else {
+          this.setState({
+              weatherObj: '',
+              fiveDay: '',
+              search: ''
+          })
+      }
     });
   };
 
@@ -44,19 +54,21 @@ class Forecast extends Component {
       <div>
         <input
           className="search"
-          placeholder="Search..."
+          placeholder="Search by city..."
           type="text"
           onChange={this.handleChange}
           value={this.state.search}
         />
         <button onClick={() => this.getWeather()}>search</button>
-            <h1>
-                {this.state.weatherObj ? this.state.weatherObj.title : null}
-                </h1>
+        <h1>{this.state.weatherObj ? this.state.weatherObj.title : null}</h1>
         <div className="forecast">
-          {this.state.weatherObj
-            ? this.state.fiveDay.map((el, i) => <Weather key={el.id} el={el} weatherObj={this.state.weatherObj} />)
-            : <h1>City not found, check spelling and try again</h1>}
+          {this.state.weatherObj ? (
+            this.state.fiveDay.map((el, i) => (
+              <Weather key={el.id} el={el} weatherObj={this.state.weatherObj} />
+            ))
+          ) : (
+            <h1 className='error'>City not found, check spelling or search for another city</h1>
+          )}
         </div>
       </div>
     );
