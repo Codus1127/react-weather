@@ -12,12 +12,6 @@ class Forecast extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.error !== this.state.error) {
-      this.getWeather();
-    }
-  }
-
   handleChange = event => {
     this.setState({ search: event.target.value });
   };
@@ -66,7 +60,7 @@ class Forecast extends Component {
           value={this.state.search}
           onKeyPress={this.handleKeyPress}
         />
-        <button onClick={() => this.getWeather()}>Search</button>
+        <button onClick={this.getWeather}>Search</button>
         <h1 className="cityTitle">{this.state.weatherObj ? this.state.weatherObj.title : null}</h1>
         <div className="weatherCard">
           {this.state.weatherObj ? (

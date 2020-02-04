@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Axios from "axios";
 
 class Weather extends Component {
   constructor(props) {
@@ -15,22 +14,13 @@ class Weather extends Component {
   componentDidMount = () => {
     this.convertToFahren();
     this.setBackground();
-    this.getWeatherIcon();
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.url !== this.state.url) {
       this.setBackground();
-      this.getWeatherIcon();
     }
   }
-
-  getWeatherIcon = async () => {
-    const icon = this.props.el.weather_state_abbr;
-    await Axios.get(
-      `https://www.metaweather.com/static/img/weather/png/64/${icon}.png`
-    ).then(res => this.setState({ icon: res.data }));
-  };
 
   convertToFahren = () => {
     let fahrenheit = Math.floor(this.props.el.the_temp * (9 / 5) + 32);
