@@ -45,7 +45,7 @@ class Weather extends Component {
 
   setBackground = () => {
     const weather = this.props.el.weather_state_name;
-    if (weather == "Light Cloud") {
+    if (weather === "Light Cloud") {
       this.setState({
         url:
           "https://image.made-in-china.com/2f0j00prkRbFwtCycf/Blue-Sky-White-Clouds-LED-Light-Panel-for-Indoor-Design.jpg"

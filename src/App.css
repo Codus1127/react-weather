@@ -50,6 +50,13 @@
 
 .error {
   font-size: 1rem;
+  color: #808080;
+}
+
+.credit {
+  margin-top: 50px;
+  font-size: 1rem;
+  color: #808080;
 }
 
 /* HEADER STYLING */

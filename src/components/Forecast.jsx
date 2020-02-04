@@ -43,6 +43,7 @@ class Forecast extends Component {
             search: ""
           })
         );
+        // console.log(this.state.weatherObj)
       }
       else {
           this.setState({
@@ -73,9 +74,10 @@ class Forecast extends Component {
               <Weather key={el.id} el={el} weatherObj={this.state.weatherObj} />
             ))
           ) : (
-            <h1 className='error'>City not found, check spelling or search for another city</h1>
+            <p className='error'>City not found, check spelling or search for another city</p>
           )}
         </div>
+          <p className='credit'>This website is powered by <a href="https://www.metaweather.com/">metaweather.com</a></p>
       </div>
     );
   }
